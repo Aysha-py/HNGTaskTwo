@@ -1,0 +1,52 @@
+.movie_card{
+    padding: 20px; 
+}
+.movie_cards_title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.movie_cards_container{
+ 
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  
+}
+
+
+.movie_card{
+    width: 100% !important;
+  border: none !important;
+  font-size: 1.5rem;
+  grid-column: span 1;
+}
+
+.movie_cards_title h4{
+    font-size: 2.5rem;
+    font-weight: 500;
+}
+.movie_cards_title h5{
+    color: #BE123C;
+    font-weight: 500;
+
+}
+.imdb_data{
+    display: flex;
+    font-size: 18px;
+    width: 50%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media only screen and (max-width: 1024px) {
+    .movie_cards_container{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media only screen and (max-width: 720px) {
+.movie_cards_container{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+}
