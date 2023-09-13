@@ -3,6 +3,19 @@
   
   
 }
+
+.loader{
+    background-color: rgb(83, 80, 80);
+    width: 100%;
+    height: 100vh;
+    
+}
+.loader-inner p{
+    color: var(--gradient-blue);
+    font-size: 1.5em;
+    text-align: center !important;
+    font-weight: 600;
+}
 .movie_details_sidebar {
  width: 1000px;
   border: 1px solid rgba(0, 0, 0, 0.5);

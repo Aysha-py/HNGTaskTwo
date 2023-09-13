@@ -32,7 +32,7 @@ const Homepage = () => {
      const searchURL = searchQuery
     ? `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${searchQuery}`
     : `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_API_KEY}`;
-
+    setTimeout(() => { 
         Axios.get(searchURL)
             .then((response) => {
             if (response.status === 200) {
@@ -51,6 +51,7 @@ const Homepage = () => {
                 setIsError(true);
                 toast.error("Oops, data cannot be fetched! Check your internet connection");
             });
+        }, 3000); 
 };
 
 
@@ -126,7 +127,11 @@ const override = css`
        
         <div className="movie_card_container">
         {
-            isloading ?  <BarLoader color={'red'} css={override} isloading={true}  style={{ width: '50%' }}/> :
+            isloading ? 
+            <div className='loader-inner'>  
+                <BarLoader color={'red'} css={override} isloading={true}  style={{ width: '50%' ,}}/>
+                <p>Loading Top Ten Movie Collection....</p>
+            </div>:
             isError ?  <Toaster position="top-center"/>
                 :
             

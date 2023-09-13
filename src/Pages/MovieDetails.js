@@ -7,28 +7,39 @@ import { useParams } from 'react-router-dom'
 import Axios from 'axios';
 import tv from "../Assets/Images/tv.png"
 import Button from 'react-bootstrap/Button';
-
+import { css } from '@emotion/react';
+import BarLoader from "react-spinners/BarLoader";
+import Spinner from 'react-bootstrap/Spinner';
 
 const MovieDetails = () => {
     const [movie,setMovie] = useState(null)
+     const [isloading, setisloading] = useState(true);
+    const [isError, setIsError] = useState(false);
     const { id } = useParams()
     const TMDB_API_KEY = process.env.REACT_APP_API_KEY
     const imgPath = "https://image.tmdb.org/t/p/w500"
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const fetchsingleMovie = () => {
-      
-    Axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}&language=en-US`)
-        .then((response) => {
-            if (response.status === 200) {
-                setMovie(response.data);
-            } else {
-                console.error('Failed to fetch data');
-            }
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+      setTimeout(() => { 
+        Axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}&language=en-US`)
+            .then((response) => {
+
+                if (response.status === 200) {
+                    setMovie(response.data);
+                    setisloading(false);
+                } else {
+                    setIsError(true); 
+                    setisloading(false);
+                    console.error('Failed to fetch data');
+                }
+            })
+            .catch((error) => {
+                setIsError(true); 
+                setisloading(false);
+                console.error(error);
+            });
+    }, 3000); 
 };
 
       useEffect(()=>{
@@ -60,15 +71,33 @@ const MovieDetails = () => {
 
     return `${hoursText} ${minutesText}`;
   }
+  
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+ 
+`;
  
   return (
     <div className='Movie_details_container'>
-        <div className='movie_details_sidebar'>
-            <div className='sidebar_header'>
-                <img src={tv} alt='tv'/>
-                <span>Movies</span>
+      {isloading &&
+        <div className='loader'>
+            <div className='loader-inner'>  
+                <BarLoader color={'red'} css={override} isloading={true}  style={{ width: '50%' ,}}/>
+                <p>Loading movie Information....</p>
             </div>
-            <div className='sidebar_list_items'>
+        </div>
+       }
+      {isError && <p>Error: Failed to fetch data. Please check your internet connection.</p>}
+      {!isloading && !isError && movie && (
+        <>
+            <div className='movie_details_sidebar'>
+                <div className='sidebar_header'>
+                    <img src={tv} alt='tv'/>
+                    <span>Movies</span>
+                </div>
+                <div className='sidebar_list_items'>
                 <ul>
                     <li>Home</li>
                     <li>Movies</li>
@@ -137,6 +166,10 @@ const MovieDetails = () => {
             </div>
         
         </div>
+            </>
+      )
+}
+       
     </div>
   )
 }
