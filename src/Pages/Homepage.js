@@ -18,7 +18,7 @@ import Button from 'react-bootstrap/Button';
 const Homepage = () => {
     
     const [topTenMovies, setTopTenMovies] = useState([])
-    const [isloading, setisloading] = useState(true);
+    const [isLoading, setisLoading] = useState(true);
     const [isError, setIsError] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
@@ -28,7 +28,7 @@ const Homepage = () => {
     
 
    const fetchTrending = () => {
-    setisloading(true);
+    setisLoading(true);
      const searchURL = searchQuery
     ? `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${searchQuery}`
     : `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_API_KEY}`;
@@ -36,7 +36,7 @@ const Homepage = () => {
         Axios.get(searchURL)
             .then((response) => {
             if (response.status === 200) {
-                 setisloading(false); 
+                 setisLoading(false); 
                 const firstTenResults = response?.data?.results.slice(0, 10);
                 setTopTenMovies(firstTenResults)
                   if (searchQuery) {
@@ -47,7 +47,7 @@ const Homepage = () => {
             }
             })
             .catch((error) => {
-                setisloading(false); 
+                setisLoading(false); 
                 setIsError(true);
                 toast.error("Oops, data cannot be fetched! Check your internet connection");
             });
@@ -103,11 +103,7 @@ const override = css`
 
                 <div className='movie_info'>
                     <h1>John Wick 3 : Parabellum</h1>
-                    {/* <div className='rating'>
-                        <span><img src={Imdb} alt="ratingType" />86.0/100</span>
-                       
-                        <span><img src={orange} alt="ratingType" />97%</span>
-                    </div> */}
+                   
                     <div className='movie_details'>
                         <p>
                             John Wick is on the run after killing a member of the 
@@ -125,22 +121,23 @@ const override = css`
             </div>
         </header>
        
-        <div className="movie_card_container">
-        {
-            isloading ? 
-            <div className='loader-inner'>  
-                <BarLoader color={'red'} css={override} isloading={true}  style={{ width: '50%' ,}}/>
+        <div className='movie_card_container'>
+        {isLoading ? (
+            <div className='loader-inner'>
+                <BarLoader
+                color={'red'}
+                css={override}
+                isLoading={true}
+                style={{ width: '50%' }}
+                />
                 <p>Loading Top Ten Movie Collection....</p>
-            </div>:
-            isError ?  <Toaster position="top-center"/>
-                :
-            
-            
-                (
-                <MovieCard topMovies={searchQuery ? searchResults : topTenMovies}/>
-                )
-}
-        </div>
+            </div>
+            ) : isError ? (
+            <Toaster position='top-center' />
+            ) : (
+            <MovieCard topMovies={searchQuery ? searchResults : topTenMovies} />
+            )}
+      </div>
 
         <footer>
             <div className='social_media'>

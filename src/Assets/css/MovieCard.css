@@ -1,4 +1,4 @@
-.movie_card{
+.movie_card_box{
     padding: 20px; 
 }
 .movie_cards_title{
@@ -7,14 +7,12 @@
     align-items: center;
 }
 .movie_cards_container{
- 
   display: grid;
   grid-template-columns: repeat(4, 1fr); 
-  
 }
 
 
-.movie_card{
+.movie_card_box{
     width: 100% !important;
   border: none !important;
   font-size: 1.5rem;

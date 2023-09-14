@@ -9,7 +9,7 @@ import tv from "../Assets/Images/tv.png"
 import Button from 'react-bootstrap/Button';
 import { css } from '@emotion/react';
 import BarLoader from "react-spinners/BarLoader";
-import Spinner from 'react-bootstrap/Spinner';
+import toast, { Toaster } from 'react-hot-toast';
 
 const MovieDetails = () => {
     const [movie,setMovie] = useState(null)
@@ -37,7 +37,7 @@ const MovieDetails = () => {
             .catch((error) => {
                 setIsError(true); 
                 setisloading(false);
-                console.error(error);
+               toast.error("Oops, Movie cannot be fetched! Check your internet connection");;
             });
     }, 3000); 
 };
@@ -89,7 +89,7 @@ const override = css`
             </div>
         </div>
        }
-      {isError && <p>Error: Failed to fetch data. Please check your internet connection.</p>}
+      {isError && <Toaster position="top-center"/>}
       {!isloading && !isError && movie && (
         <>
             <div className='movie_details_sidebar'>

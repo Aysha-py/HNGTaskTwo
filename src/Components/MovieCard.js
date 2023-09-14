@@ -29,7 +29,7 @@ const MovieCard = ({topMovies}) => {
   return (
     <div>
 
-            <div className='movie_card'>
+            <div className='movie_card_box'>
                 <div className='movie_cards_title'>
                     <h4>Featured</h4>
                     <h5>See More <span><FaGreaterThan size={20}/></span></h5>
@@ -60,9 +60,7 @@ const MovieCard = ({topMovies}) => {
                             <Card.Text data-testid="movie-release-date">
                                <h5> {`Release date: ${convertToUTC(item?.release_date)} `}</h5>
                             </Card.Text>
-                            <Card.Text data-testid="movie-release-date">
-                               <h5 data-test-id="movie-runtime">Runtime : <span>{item?.runtime}</span></h5>
-                            </Card.Text>
+                            
                             
                         </Card.Body>
                     </Card>
