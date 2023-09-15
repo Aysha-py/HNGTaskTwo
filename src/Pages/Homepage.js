@@ -54,7 +54,7 @@ const Homepage = () => {
                 setIsError(true);
                 toast.error("Oops, data cannot be fetched! Check your internet connection");
             });
-        }, 3000); 
+        }, 2000); 
 };
  const handleSearch = (e) => {
         const updatedSearchQuery = e.target.value;
