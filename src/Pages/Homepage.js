@@ -11,6 +11,7 @@ import Axios from 'axios';
 import { css } from '@emotion/react';
 import toast, { Toaster } from 'react-hot-toast';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 
 
@@ -22,12 +23,13 @@ const Homepage = () => {
     const [isError, setIsError] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
+    const [includeSearch, setIncludeSearch] = useState(false);
    
     const TMDB_API_KEY = process.env.REACT_APP_API_KEY
 
-    
+   
 
-   const fetchTrending = () => {
+   const fetchTrending = (searchQuery = '') => {
     setisLoading(true);
      const searchURL = searchQuery
     ? `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${searchQuery}`
@@ -37,10 +39,11 @@ const Homepage = () => {
             .then((response) => {
             if (response.status === 200) {
                  setisLoading(false); 
-                const firstTenResults = response?.data?.results.slice(0, 10);
-                setTopTenMovies(firstTenResults)
+                const Results = response?.data?.results.slice(0, 10);
+                setTopTenMovies(Results)
                   if (searchQuery) {
-                     setSearchResults(firstTenResults);
+                     setSearchResults(Results);
+                     setIncludeSearch(searchQuery.length > 0 && Results.length > 0)
                 }
             } else {
                 console.error('Failed to fetch data');
@@ -53,6 +56,13 @@ const Homepage = () => {
             });
         }, 3000); 
 };
+ const handleSearch = (e) => {
+        const updatedSearchQuery = e.target.value;
+        setSearchQuery(updatedSearchQuery);
+        
+        
+        fetchTrending(updatedSearchQuery);
+    };
 
 
 const override = css`
@@ -79,7 +89,7 @@ const override = css`
             <div className='header-items'>
                 <div className='sub-header-items'>
                     <div className='header-logo'>
-                        <img src={tv} alt='tv'/>
+                       <Link to="/"><img src={tv} alt='tv'/></Link> 
                         <span>MovieBox</span>
                     </div>
 
@@ -89,7 +99,7 @@ const override = css`
                                 id='search'
                                 placeholder='What did you want to watch'
                                 value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}/>
+                                 onChange={(e) => handleSearch(e)}/>
                             <span><BsSearch size={24} onClick={fetchTrending}/></span>
                         </div>
                        
@@ -130,13 +140,25 @@ const override = css`
                 isLoading={true}
                 style={{ width: '50%' }}
                 />
-                <p>Loading Top Ten Movie Collection....</p>
+                {searchQuery.length > 0  ? (<p>Search result for "{searchQuery}"...</p> ) :
+                
+                (<p>Loading Movie Collection....</p>)
+                
+                }
             </div>
             ) : isError ? (
             <Toaster position='top-center' />
-            ) : (
-            <MovieCard topMovies={searchQuery ? searchResults : topTenMovies} />
-            )}
+            ) : <>
+                    {searchResults.length > 0 && searchResults.length === 0 ? (
+                        <div className='loader-inner'>
+                            <p>No search results for "{searchQuery}"</p>
+                        </div>
+                        
+                    ) : (
+                        <MovieCard topMovies={searchQuery ? searchResults : topTenMovies} />
+                    )}
+                </>
+            }
       </div>
 
         <footer>

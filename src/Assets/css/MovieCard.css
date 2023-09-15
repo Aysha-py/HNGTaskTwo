@@ -9,6 +9,7 @@
 .movie_cards_container{
   display: grid;
   grid-template-columns: repeat(4, 1fr); 
+  grid-gap:20px;
 }
 
 
@@ -35,16 +36,30 @@
     justify-content: space-between;
     align-items: center;
 }
+.imdb_data_left,.imdb_data_right{
+    display: flex;
+   margin-right: 30px;
+}
+.imdb_data_left p,.imdb_data_right p{
+    margin-left: 20px;
+}
 
 @media only screen and (max-width: 1024px) {
     .movie_cards_container{
         display: grid;
         grid-template-columns: repeat(2,1fr);
+        justify-content: center;
+        align-items: center;
+       
     }
+    /* .movie_card_box {
+        margin-left: 40px;
+    } */
 }
 @media only screen and (max-width: 720px) {
 .movie_cards_container{
     display: grid;
     grid-template-columns: 1fr;
+     margin-left: 20px;
 }
 }

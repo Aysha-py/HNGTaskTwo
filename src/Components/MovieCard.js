@@ -49,9 +49,15 @@ const MovieCard = ({topMovies}) => {
                             <Card.Title data-testid="movie-title">Movie Title: {item?.title}</Card.Title>
                             <Card.Text>
                                 <div className='imdb_data'>
-                                    <img src={Imdb} alt='IMDB' />
-                                    <p>{item?.vote_average.toFixed(1)}/10</p>
-                                    <span><img src={orange} alt='orange'/>97%</span>
+                                    <div className="imdb_data_right">
+                                        <img src={Imdb} alt='IMDB' />
+                                        <p>{item?.vote_average.toFixed(1)}/10</p>
+                                    </div>
+                                    <div className="imdb_data_left">
+                                        <img src={orange} alt='orange'/>
+                                        <p>97%</p>
+                                    </div>
+                                    
                                 
                                 </div>
                             </Card.Text>

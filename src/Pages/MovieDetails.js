@@ -1,6 +1,5 @@
 import React from 'react';
 import  {useEffect,useState}from 'react'
-import banner from "../Assets/Images/Group 56.jpg"
 import banner2 from "../Assets/Images/Rectangle 37.jpg"
 import star from "../Assets/Images/Star.png"
 import { useParams } from 'react-router-dom'
@@ -10,6 +9,12 @@ import Button from 'react-bootstrap/Button';
 import { css } from '@emotion/react';
 import BarLoader from "react-spinners/BarLoader";
 import toast, { Toaster } from 'react-hot-toast';
+import Home from "../Assets/Images/Home.png"
+import Movies from "../Assets/Images/TV Show.png"
+import logout from "../Assets/Images/Logout.png"
+import MovieProjector from "../Assets/Images/Movie Projector.png"
+import calendar from "../Assets/Images/Calendar.png"
+import { Link } from 'react-router-dom';
 
 const MovieDetails = () => {
     const [movie,setMovie] = useState(null)
@@ -62,15 +67,7 @@ const MovieDetails = () => {
             return "Invalid Date";
         }
     }
-      function formatRuntime(runtime) {
-    const hours = Math.floor(runtime / 60);
-    const minutes = runtime % 60;
 
-    const hoursText = hours > 0 ? `${hours}h` : '';
-    const minutesText = minutes > 0 ? `${minutes}m` : '';
-
-    return `${hoursText} ${minutesText}`;
-  }
   
 const override = css`
   display: block;
@@ -94,28 +91,28 @@ const override = css`
         <>
             <div className='movie_details_sidebar'>
                 <div className='sidebar_header'>
-                    <img src={tv} alt='tv'/>
+                   <Link to="/"> <img src={tv} alt='tv'/></Link>
                     <span>Movies</span>
                 </div>
                 <div className='sidebar_list_items'>
                 <ul>
-                    <li>Home</li>
-                    <li>Movies</li>
-                    <li>TV series</li>
-                    <li>Upcoming</li>
+                    <li><img src={Home} alt='home'/><span>Home</span></li>
+                    <li><img src={MovieProjector} alt='MovieProjector'/><span>Movies</span></li>
+                    <li><img src={Movies} alt='Movies'/><span>Tv Series</span></li>
+                    <li><img src={calendar} alt='calender'/><span>Upcoming</span></li>
+                  
                     
                 
                 </ul>
             </div>
 
             <div className='play_movies'>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus rerum impedit harum, vero necessitatibus aliquid, earum repudiandae 
-                    perspiciatis perferendis placeat minus at tempora. Aliquid id possimus, ea recusandae ab ratione!
-                </p>
+               <p>Play movie quizes and earn free tickets</p>
+               <p>50k people are playing now</p>
                 <Button>Start Playing</Button>
             </div>
             <div className='logout'>
-               <p>Logout</p>
+               <p><img src={logout} alt='logout'/><span>Logout</span></p>
             </div>
         </div>
         
@@ -137,20 +134,20 @@ const override = css`
                     </div>
                     <div className='movie_overview'>
                         <p data-test-id="movie-overview">
-                           {movie?.overview}
+                          Movie Overview: <span>{movie?.overview}</span> 
                         </p>
                     </div>
 
                  
                     <p data-test-id="movie-release-date">Release date: <span> {`${convertToUTC(movie?.release_date)} `}</span></p>
-                    <p data-test-id="movie-runtime">Runtime : <span>{formatRuntime(movie?.runtime)}</span></p>
+                    <p data-test-id="movie-runtime">Runtime (In Minutes): <span>{`${movie?.runtime} Minutes`}</span></p>
                    
                 </div>
 
                 <div className='movie_details_right'>
                     <div className="rating_star">
                         <img src={star} alt="start"/>
-                        <p>8.5/10</p>
+                        <p>8.5/10 | 350k</p>
                     </div>
                     <div className='movie_details_button'>
                         <Button variant="danger" size='lg'>See Showtimes</Button>
