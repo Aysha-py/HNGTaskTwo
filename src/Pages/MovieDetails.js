@@ -140,7 +140,7 @@ const override = css`
 
                  
                     <p data-testid="movie-release-date">Release date: <span> {`${convertToUTC(movie?.release_date)} `}</span></p>
-                    <p data-testid="movie-runtime">Runtime (In Minutes): <span>{`${movie?.runtime}`}</span></p>
+                    <p data-testid="movie-runtime">Runtime: <span>{`${movie?.runtime}`}</span></p>
                    
                 </div>
 
