@@ -148,14 +148,14 @@ const override = css`
             </div>
             ) : isError ? (
             <Toaster position='top-center' />
-            ) : <>
-                    {searchResults.length > 0 && searchResults.length === 0 ? (
-                        <div className='loader-inner'>
-                            <p>No search results for "{searchQuery}"</p>
-                        </div>
+            ) :  <>
+                    {searchResults.length > 0 ? (
+                      <MovieCard topMovies={searchQuery ? searchResults : topTenMovies} />
                         
                     ) : (
-                        <MovieCard topMovies={searchQuery ? searchResults : topTenMovies} />
+                        <div className='loader-inner'>
+                            <p>{searchQuery.length > 0 ? `No search results for "${searchQuery}"`: <MovieCard topMovies={searchQuery ? searchResults : topTenMovies} /> }</p>
+                        </div>
                     )}
                 </>
             }
