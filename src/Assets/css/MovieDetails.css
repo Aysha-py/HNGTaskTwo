@@ -146,6 +146,7 @@
 .sidebar_list_items span{
     align-items: flex-start;
 }
+
 @media only screen and (max-width: 1200px) {
     .movie_details_sidebar {
         display: none;

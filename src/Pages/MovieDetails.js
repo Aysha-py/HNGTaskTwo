@@ -132,15 +132,12 @@ const override = css`
                         </div>
                         
                     </div>
-                    <div className='movie_overview'>
-                        <p data-testid="movie-overview">
-                          Movie Overview: <span>{movie?.overview}</span> 
-                        </p>
-                    </div>
-
-                 
-                    <p data-testid="movie-release-date">Release date: <span> {`${convertToUTC(movie?.release_date)} `}</span></p>
-                    <p data-testid="movie-runtime">Runtime: <span>{`${movie?.runtime}`}</span></p>
+                   
+                         <div data-testid="movie-overview">Movie Overview: {movie?.overview}</div>
+                        <div data-testid="movie-release-date">Release date: {`${convertToUTC(movie?.release_date)} `}</div>
+                        <div data-testid="movie-runtime">Runtime: {`${movie?.runtime} `}</div>
+                  
+                   
                    
                 </div>
 
