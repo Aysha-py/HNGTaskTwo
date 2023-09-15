@@ -1,6 +1,6 @@
 # Movie Discovery Web Application
 
-Welcome to Movie Discovery Web Application, a Web application that allows users to search for movies and view details about them.
+Welcome to Movie Discovery Web Application, a Web application that allows users to search for movies, view details about them, and save their favorite movie.
 
 ## Table of Contents
 

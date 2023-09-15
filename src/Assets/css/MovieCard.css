@@ -43,6 +43,12 @@
 .imdb_data_left p,.imdb_data_right p{
     margin-left: 20px;
 }
+.favorites{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 20px;
+}
 
 @media only screen and (max-width: 1024px) {
     .movie_cards_container{

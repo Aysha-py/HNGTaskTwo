@@ -125,7 +125,7 @@ const override = css`
             <div className='movie_details'>
                 <div className='movie_details_left'>
                     <div className="movie_type" >  
-                        <h2 data-test-id="movie-title" className='movie-title'style={{color:"#BE123C", fontSize:"3rem"}}>{movie?.title}</h2>
+                        <h2 data-testid="movie-title" className='movie-title'style={{color:"#BE123C", fontSize:"3rem"}}>{movie?.title}</h2>
                         <div className='movie_type_button'>
                             <button>Action</button>
                             <button>Drama</button>
@@ -133,14 +133,14 @@ const override = css`
                         
                     </div>
                     <div className='movie_overview'>
-                        <p data-test-id="movie-overview">
-                          <span>{movie?.overview}</span> 
+                        <p data-testid="movie-overview">
+                          Movie Overview: <span>{movie?.overview}</span> 
                         </p>
                     </div>
 
                  
-                    <p data-test-id="movie-release-date"><span>{`${convertToUTC(movie?.release_date)}`}</span></p>
-                    <p data-test-id="movie-runtime"><span>{movie?.runtime}</span></p>
+                    <p data-testid="movie-release-date">Release date: <span> {`${convertToUTC(movie?.release_date)} `}</span></p>
+                    <p data-testid="movie-runtime">Runtime (In Minutes): <span>{`${movie?.runtime}`}</span></p>
                    
                 </div>
 
